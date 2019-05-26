@@ -91,7 +91,7 @@
                     <form>
                         <div class="form-group">
                             <label for="recipient-name" class="control-label">分类名称:</label>
-                            <input type="text" class="form-control cate_name" >
+                            <input type="text" class="form-control cate_name">
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="control-label">分类别名:</label>
@@ -139,6 +139,32 @@
       </script>
     <script>
         $(function () {
+            /*
+         获取文章分类信息
+           请求地址：https://autumnfish.cn/big32/admin/category_search
+           请求方式：get
+           请求参数：无
+           步骤
+           1. 进入页面之后
+           2. 通过ajax获取数据
+           3. 数据获取到之后渲染到页面上
+               1. 结合模板引擎来渲染
+               文章新增
+
+       新增分类
+           请求地址：https://autumnfish.cn/big32/admin/category_add
+           请求方式：post
+           请求参数：
+           步骤
+           1. 点击新增按钮 弹出新增框
+           2. 新增框中输入 name和slug
+           1. 点击取消 关闭
+           2. 点击新增  
+               1. 获取数据
+               2. 调用接口
+               3. 响应回来之后
+
+         */
             function getCate() {
                 $.ajax({
                     url: 'https://autumnfish.cn/big32/admin/category_search',
@@ -154,18 +180,18 @@
             getCate()
             $('#model_add').click(function () {
                 $.ajax({
-                   url:'https://autumnfish.cn/big32/admin/category_add',
-                   type:'post',
-                   data:{
-                       name:$('.cate_name').val(),
-                       slug:$('.cate_slug').val()
-                   },
+                    url: 'https://autumnfish.cn/big32/admin/category_add',
+                    type: 'post',
+                    data: {
+                        name: $('.cate_name').val(),
+                        slug: $('.cate_slug').val()
+                    },
                     success: function (backData) {
                         console.log(backData);
                         $('#addModal').modal('hide');
-                        
+
                         if (backData.code == 200) {
-                           getCate()
+                            getCate()
                         }
                     }
                 })
