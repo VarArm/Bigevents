@@ -91,9 +91,6 @@
             var Url=URL.createObjectURL(file)
             $(this).prev().attr('src',Url)
         })
-
-
-
         // 保存修改
         //   请求地址：https://autumnfish.cn/big32/admin/userinfo_edit
         //   请求方式：post
@@ -103,9 +100,6 @@
         //   2. 获取表单数据
         //   3. 通过ajax 结合formData发送到服务器
         //   4. 返回数据之后，提示用户
-
-
-
         $('.btn-success').click(function(e){
             e.preventDefault()
             var formData=new FormData($('form')[0])
@@ -116,8 +110,7 @@
                 contentType:false,
                 processData:false,
                 success:function(backData){
-                    console.log(backData);
-                    
+                    console.log(backData); 
                 }
             })
         })

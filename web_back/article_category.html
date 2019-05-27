@@ -101,6 +101,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" id="model_shutoff">关闭</button>
+                    <button type="button" class="btn btn-primary" id="model_edit">修改</button>
                     <button type="button" class="btn btn-primary" id="model_add">新增</button>
                 </div>
             </div>
@@ -114,7 +115,6 @@
         });
 
         $('#model_shutoff').click(function () {
-            alert('shutoff');
             $('#addModal').modal('hide');
         });
         $('.category_table').delegate('a', 'click', function () {
@@ -128,11 +128,11 @@
     <script id="cate" type="text/html">
         {{each data}}
             <tr>
-                <td>{{$value.name}}</td>
+                <td>{{$value.id}}{{$value.name}}</td>
                 <td>{{$value.slug}}</td>
                 <td class="text-center">
-                    <a href='javascript:editTr({"id":"1","slug":"uncategorized","name":"未分类"});' class="btn btn-info btn-xs">编辑</a>
-                    <a href="javascript:deleteTr( 1 );" class="btn btn-danger btn-xs">删除</a>
+                    <a href='#' class="btn btn-info btn-xs btn-info-edit" data-index="{{$value.id}}">编辑</a>
+                    <a href="#" class="btn btn-danger btn-xs" data-index="{{$value.id}}">删除</a>
                 </td>
             </tr>
         {{/each}}
@@ -150,7 +150,6 @@
            3. 数据获取到之后渲染到页面上
                1. 结合模板引擎来渲染
                文章新增
-
        新增分类
            请求地址：https://autumnfish.cn/big32/admin/category_add
            请求方式：post
@@ -163,7 +162,6 @@
                1. 获取数据
                2. 调用接口
                3. 响应回来之后
-
          */
             function getCate() {
                 $.ajax({
@@ -195,13 +193,50 @@
                         }
                     }
                 })
-
             });
+            $('tbody').on('click', '.btn-info-edit', function (e) {
+                e.preventDefault()
+                var id2 = $(this).attr('data-index')
+                $('#model_edit').click(function () {
+                    $.ajax({
+                        url: 'https://autumnfish.cn/big32/admin/category_edit',
+                        type: 'post',
+                        data: {
+                            id: id2,
+                            name: $('.cate_name').val(),
+                            slug: $('.cate_slug').val()
+                        },
+                        success: function (backData) {
+                            console.log(backData);
+                            if (backData.code == 200) {
+                                $('#addModal').modal('hide');
+                                getCate()
+                            }
+                        }
+                    })
+                })
+            })
+            $('tbody').on('click', '.btn-danger', function (e) {
+                e.preventDefault()
+                var id1 = $(this).attr('data-index')
+                console.log(id1);
+                $.ajax({
+                    url: 'https://autumnfish.cn/big32/admin/category_delete',
+                    type: 'post',
+                    data: {
+                        id: id1
+                    },
+                    success: function (backData) {
+                        if (backData.code == 200) {
+                            getCate()
+                        }
+                    }
+                })
 
+            })
 
         });
     </script>
-
 </body>
 
 </html>
