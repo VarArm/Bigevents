@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/main.css" />
     <script src="js/jquery-1.12.4.min.js"></script>
     <script src="js/bootstrap/js/bootstrap.min.js"></script>
+  
 </head>
 
 <body>
@@ -149,7 +150,7 @@
     <script>
         /*
             获取文章分类信息
-              请求地址：https://autumnfish.cn/big32/admin/category_search
+              请求地址：http://localhost:8000/admin/category_search
               请求方式：get
               请求参数：无
               步骤
@@ -160,7 +161,7 @@
                   文章新增
   
           新增分类
-              请求地址：https://autumnfish.cn/big32/admin/category_add
+              请求地址：http://localhost:8000/admin/category_add
               请求方式：post
               请求参数：
               步骤
@@ -177,7 +178,7 @@
             //封装搜索数据函数
             function getCate() {
                 $.ajax({
-                    url: 'https://autumnfish.cn/big32/admin/category_search',
+                    url: 'http://localhost:8000/admin/category_search',
                     type: 'get',
                     success: function (backData) {
                         console.log(backData);
@@ -190,7 +191,7 @@
             //点击删除按钮
             window.deleteTr = function (id) {
                 $.ajax({
-                    url: 'https://autumnfish.cn/big32/admin/category_delete',
+                    url: 'http://localhost:8000/admin/category_delete',
                     type: 'post',
                     data: {
                         id: id
@@ -212,19 +213,17 @@
             }
             // 默认调用一次
             getCate()
-
             //点击添加分类按钮
             $('.btn-add').click(function () {
                 $('.modal-title').text('肆意新增吧')
                 $('#model_add').text('新增').removeClass('btn-success')
                 $('form input').val('')
             })
-
             // 点击新增按钮
             $('#model_add').click(function () {
                 if ($(this).hasClass('btn-success')) {
                     $.ajax({
-                        url: 'https://autumnfish.cn/big32/admin/category_edit',
+                        url: 'http://localhost:8000/admin/category_edit',
                         type: 'post',
                         data: $('form').serialize(),
                         success: function (backData) {
@@ -235,7 +234,7 @@
                     })
                 } else {
                     $.ajax({
-                        url: 'https://autumnfish.cn/big32/admin/category_add',
+                        url: 'http://localhost:8000/admin/category_add',
                         type: 'post',
                         data: {
                             name: $('.cate_name').val(),
@@ -253,7 +252,6 @@
                     })
                 }
                 $('#addModal').modal('hide')
-
             })
         })
     </script>

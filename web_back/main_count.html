@@ -93,15 +93,12 @@
           {'count':45,'date':'2019-05-11'},
           {'count':38,'date':'2019-05-12'},
         ];
-
         let aCount = [];
         let aDate = [];
-
         for(var i=0;i<aList_all.length;i++){
             aCount.push(aList_all[i].count);
             aDate.push(aList_all[i].date);
         }
-
         var chartopt = {
                   title:{
                       text: '月新增文章数',
@@ -171,10 +168,12 @@
                       height:220
                   }                 
             };
-
         oChart.setOption(chartopt);
 
 
+
+
+        
         var oPie = echarts.init(document.getElementById('pie_show'));
         var oPieopt =  
         {
