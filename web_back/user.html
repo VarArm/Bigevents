@@ -79,10 +79,10 @@
                 success: function (backData) {
                     console.log();
 
-                    // for (const key in backData.data) {
-                    //     $('input.' + key).val(backData.data[key])
-                    // }
-                    // $('.user_pic').attr('src', backData.data.user_pic)
+                    for (const key in backData.data) {
+                        $('input.' + key).val(backData.data[key])
+                    }
+                    $('.user_pic').attr('src', backData.data.user_pic)
                 }
             })
             // 本地图片预览

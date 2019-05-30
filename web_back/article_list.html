@@ -203,7 +203,7 @@
         <td class="text-center">{{v.state}}</td>
         <td class="text-center">
             <a href="article_edit.html" class="btn btn-default btn-xs">编辑</a>
-            <a href="javascript:deleteTr( 1003 );" class="btn btn-danger btn-xs">删除</a>
+            <a href="javascript:deleteTr({{v.id}});" class="btn btn-danger btn-xs">删除</a>
         </td>
     </tr>
         {{/each}}
@@ -259,6 +259,21 @@
                     }
                 })
             }
+            //点击删除
+            window.deleteTr=function(id){
+                $.ajax({
+                    url:'http://localhost:8000/admin/article_delete',
+                    data:{
+                        id:id
+                    },
+                    success:function(backData){
+                        console.log(backData);
+                        if (backData.code==200){
+                            getSearch()
+                        } 
+                    }
+                })
+            }
             $.ajax({
                 url: 'http://localhost:8000/admin/category_search',
                 type: 'get',
@@ -268,9 +283,6 @@
                 }
             })
             getSearch()
-
-
-
             $('#btnSearch').click(function (e) {
                 e.preventDefault()
                 getSearch()
