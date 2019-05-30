@@ -52,7 +52,6 @@
             </ul>
         </div>
     </div>
-
     <div class="main_con clearfix">
         <div class="left_con">
             <ul class="focus_list">
@@ -77,7 +76,6 @@
                     <p>图片说明</p>
                 </li>
             </ul>
-
             <div class="common_title">
                 <h3><i class="fa fa-edit"></i> 最新资讯</h3>
                 <a href="#" class="more"><i class="fa fa-angle-double-right"></i></a>
@@ -215,12 +213,45 @@
             <span>|</span>
             <a href="#">招聘人才</a>
             <span>|</span>
-            <a href="#">友情链接</a>		
+            <a href="#">友情链接</a>
         </div>
-        <p>CopyRight © 2019 深圳大事件信息技术股份有限公司   All Rights Reserved</p>
-        <p>电话：0755-****888    粤ICP备*******8号</p>
+        <p>CopyRight © 2019 深圳大事件信息技术股份有限公司 All Rights Reserved</p>
+        <p>电话：0755-****888 粤ICP备*******8号</p>
     </div>
+    <script src="./js/jquery-1.12.4.min.js"></script>
+    <script src="./js/template-web.js"></script>
+    <script type="text/html" id="article">
+        {{each data}}
+        {{if $index==0}}
+            <li class="first">
+        {{else}}
+           <li>
+        {{/if}}
+        <a href="./article.html?id={{$value.id}}"><img src="{{$value.cover}}" alt=""></a>
+        <p>{{$value.title}}</p>
+        </li>
+        {{/each}}</script>
+   
+    <script>
+        $(function () {
 
+            $.ajax({
+                url: 'http://localhost:8000/admin/search',
+                type: 'get',
+                data: {
+                    page: 1,
+                    perpage: 5
+                },
+                success: function (backData) {
+                    console.log(backData);
+                    var html = template('article', backData)
+                    $('.focus_list').html(html)
+
+                }
+
+            })
+        });
+    </script>
 </body>
 
 </html>
