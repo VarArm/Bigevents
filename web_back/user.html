@@ -78,7 +78,6 @@
                 type: 'get',
                 success: function (backData) {
                     console.log();
-
                     for (const key in backData.data) {
                         $('input.' + key).val(backData.data[key])
                     }
@@ -93,6 +92,8 @@
             $('#exampleInputFile').change(function () {
                 var file = this.files[0]
                 var Url = URL.createObjectURL(file)
+                console.log(Url);
+                
                 $(this).prev().attr('src', Url)
             })
             // 保存修改

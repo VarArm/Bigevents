@@ -91,6 +91,7 @@
     <script>
     $(function(){
          // 本地图片预览
+       
             //   1. 为input file 绑定change事件 
             //   2. 获取this.files[0]
             //   3. 调用方法生成url
@@ -116,6 +117,7 @@
                 formData.append('state','草稿')
               $.ajax({
                   url:'http://localhost:8000/admin/article_publish',
+                 
                   type:'post',
                   data:formData,
                   contentType:false,
